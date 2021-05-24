@@ -125,6 +125,12 @@ columns=fullflexible
 \bigskip
 \renewcommand{\thefigure}{\theenumi}
 \renewcommand{\thetable}{\theenumi}
+\newcommand{\dsum}{\displaystyle\sum}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}{Definition}
 
 Download the python code from 
 \begin{lstlisting}
@@ -147,14 +153,56 @@ Let $X_{1},X_{2},....$ be i.i.d N(1,1) random variables.Let $S_{n}=X_{1}^{2}+X_{
 
 \section{Solution-CSIR UGC NET June 2012,Q.50}
 
-If two random variables $X,Y$ are independent then $X^2,Y^2$ are also independent.
-Since $X_{1},X_{2},X_{3},...$ are mutually independent random variables therefore the random variables $X_{1}^{2},X_{2}^{2},X_{3}^{2},....$  are also mutually independent.
-
+\begin{lemma}
+If two normal random variables $X,Y$ are independent then $X^2,Y^2$ are also independent.
+\end{lemma}
+\begin{proof}: Since X and Y are normal random variables they can take any value in $\mathbb{R}$(set of real numbers).Now by the independence of X and Y,
+\begin{align}
+    \Pr\brak{X=x}&=\Pr\brak{X=x|Y=y}\\
+    \Pr\brak{X=x}&=\Pr\brak{X=x|Y=-y}\\
+    \Pr\brak{X=-x}&=\Pr\brak{X=-x|Y=y}\\
+    \Pr\brak{X=-x}&=\Pr\brak{X=-x|Y=-y}
+\end{align}
+Or Simply,
+\begin{align}
+ \Pr\brak{\textbf{X=x or X=-x}}&=\Pr\brak{\textbf{X=x or X=-x}|\textbf{Y=y or Y=-y}}
+\end{align}
+Thus
+\begin{align}
+    \Pr\brak{X^{2}=x^{2}}=\Pr\brak{X^{2}=x^{2}|Y^{2}=y^{2}}
+\end{align}
+Implies that the random variables $X^{2}$ and $Y^{2}$ are independent.
+\end{proof}
+Since $X_{1},X_{2},X_{3},...$ are mutually independent random variables ,by using lemma \brak{2.1} ,the random variables $X_{1}^{2},X_{2}^{2},X_{3}^{2},....$  are also mutually independent.
 \begin{align}
     S_{n}=X_{1}^2+X_{2}^2+X_{3}^2+......X_{n}^2
 \end{align}
-We know that if X and Y are independent random variables $Var(X+Y)=Var(X)+Var(Y)$.
-\\Therefore,
+ \begin{lemma}
+ If X and Y are independent random variables
+ \begin{align}
+     Var(X+Y)=Var(X)+Var(Y)
+ \end{align}
+ \end{lemma}
+ \begin{proof}
+ \begin{align}
+    Var(X+Y)&=E\brak{(X+Y)^{2}}-\brak{E(X+Y)}^{2}
+    \\      &=E\brak{X^{2}+Y^{2}+2XY}-\brak{E(X)+E(Y)}^{2}
+    \\      &=Var(X)+Var(Y)+2E(XY)-2E(X)E(Y)
+ \end{align}
+ Now to show that E(XY)=E(X)E(Y) if X,Y are independent
+ \begin{align}
+     E(XY)&=\sum_{x,y}xy\Pr\brak{X=x,Y=y}
+     \\ &=\sum_{x,y}xy\Pr\brak{X=x}\Pr\brak{Y=y}
+     \\ &=\sum_{x}\sum_{y}xy\Pr\brak{X=x}\Pr\brak{Y=y}
+     \\ &=\sum_{x}x\Pr\brak{X=x}\sum_{y}y\Pr\brak{Y=y}
+     \\\implies E(XY) &=E(X)E(Y)
+ \end{align}
+ Now substituting (2.0.16) in (2.0.11) we get,
+ \begin{align}
+     Var(X+Y)=Var(X)+Var(Y)
+ \end{align}
+ \end{proof}
+By using lemma (2.2),
 \begin{align}
     Var\brak{S_{n}}=Var\brak{X_{1}^2}+Var\brak{X_{2}^2}+..Var\brak{X_{n}^2}
 \end{align}
@@ -166,8 +214,8 @@ Now we find the variance of $X_{1}^2$.
 \begin{align}
     Var(X_{1}^2)=E(X_{1}^4)-(E(X_{1}^2))^2
 \end{align}
-But we don't know the values of $E(x_{1}^2)$ and $E(X_{1}^4)$
-First we find the value of $E(x_{1}^2)$. 
+But we don't know the values of $E(X_{1}^2)$ and $E(X_{1}^4)$.
+Finding the value of $E(X_{1}^2)$,
 \begin{align}
     Var(X_{1})=E(X_{1}^2)-(E(X_{1}))^2
 \end{align}
@@ -176,7 +224,7 @@ Since $X_{1}$ is a N(1,1) random variable $E(X_{1})=1$ and $Var(X_{1})=1$.Theref
     E(X_{1}^2)-(1)^2&=1
  \\  E(X_{1}^2)&=2
 \end{align}
-Now we find the value of $E(X_{1}^4)$.
+Finding the value of $E(X_{1}^4)$.
 \\Since $X_{1}$ is a $N(1,1)$ random variable pdf of $X_{1}$ will be 
 \begin{align}
     f(X_{1})=\frac{1}{\sqrt{2\pi}}\brak{e^{-\frac{(X_{1}-1)^2}{2}}}
@@ -193,6 +241,7 @@ Now expected value of $X_{1}^{4}$ will be,
    E(X_{1}^4)&=\int\limits_{-\infty}^{+\infty}X_{1}^{4}f(X_{1})\,dX_{1}
 \\   &=\int\limits_{-\infty}^{+\infty}X_{1}^{4}\brak{\frac{1}{\sqrt{2\pi}}\brak{e^{-\frac{(X_{1}-1)^2}{2}}}}\,dX_{1}
 \end{align}
+
 Now put $X_{1}-1=t$,
 \begin{align}
     E(X_{1}^4)&=\frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{+\infty}(t+1)^{4}\brak{e^{-\frac{t^{2}}{2}}}\,dt
@@ -216,32 +265,34 @@ similarly,
 \begin{align}
     \int\limits_{-\infty}^{+\infty}x^{4}\brak{e^{-ax^{2}}}\,dx&=\frac{3\sqrt{\pi}}{4\sqrt{a^5}}
 \end{align}
-Using (2.0.15),(2.0.17) and (2.0.18) in (2.0.14) we get,
+Using (2.0.31),(2.0.33) and (2.0.34) in (2.0.30) we get,
 \begin{align}
      E(X_{1}^4)&=\frac{1}{\sqrt{\pi}}\brak{4\brak{\frac{3\sqrt{\pi}}{4}}+12\brak{\frac{\sqrt{\pi}}{2}}+\sqrt{\pi}}
      \\&=3+6+1
     \\\implies  E(X_{1}^4)&=10
 \end{align}
-Substituting (2.0.21),(2.0.7) in (2.0.4) we get,
+Substituting (2.0.23),(2.0.37) in (2.0.20) we get,
 \begin{align}
     Var(X_{1}^{2})&=10-4
     \\\implies Var(X_{1}^{2})&=6
 \end{align}
-By the equations (2.0.23),(2.0.3) and (2.0.2), we can conclude that 
+By the equations (2.0.39),(2.0.18) and (2.0.19), we can conclude that 
 \begin{align}
     Var(S_{n})=6n
 \end{align}
 $$\lim_{n \to \infty}{\frac{Var\brak{S_{n}}}{n}}=\lim_{n \to \infty}{\frac{6n}{n}}=\lim_{n \to \infty}{6}=6$$
 Hence, option (B) is correct.
-
-
-
-
-
-
-
-
-
-
-
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
