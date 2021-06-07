@@ -41,8 +41,6 @@
     \usepackage{lscape}     
 \usepackage{multicol}
 \usepackage{chngcntr}
-\usepackage{float}
-\restylefloat{table}
 
 \DeclareMathOperator*{\Res}{Res}
 
@@ -66,6 +64,15 @@ columns=fullflexible
 }
 \begin{document}
 
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{problem}{Problem}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}{Example}[section]
+\newtheorem{definition}[problem]{Definition}
+
 \newcommand{\BEQA}{\begin{eqnarray}}
 \newcommand{\EEQA}{\end{eqnarray}}
 \newcommand{\define}{\stackrel{\triangle}{=}}
@@ -87,15 +94,12 @@ columns=fullflexible
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}
 \newcommand{\sgn}{\mathop{\mathrm{sgn}}}
-\newcommand*{\permcomb}[4][0mu]{{{}^{#3}\mkern#1#2_{#4}}}
-\newcommand*{\perm}[1][-3mu]{\permcomb[#1]{P}}
-\newcommand*{\comb}[1][-1mu]{\permcomb[#1]{C}}
-\providecommand{\abs}[1]{\vert#1\vert}
+\providecommand{\abs}[1]{\ensuremath{\left \vert #1\right\vert}}
 \providecommand{\res}[1]{\Res\displaylimits_{#1}} 
-\providecommand{\norm}[1]{\lVert#1\rVert}
+%\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
 %\providecommand{\norm}[1]{\lVert#1\rVert}
 \providecommand{\mtx}[1]{\mathbf{#1}}
-\providecommand{\mean}[1]{E[ #1 ]}
+%\providecommand{\mean}[1]{E\left[ #1 \right]}
 \providecommand{\fourier}{\overset{\mathcal{F}}{ \rightleftharpoons}}
 %\providecommand{\hilbert}{\overset{\mathcal{H}}{ \rightleftharpoons}}
 \providecommand{\system}{\overset{\mathcal{H}}{ \longleftrightarrow}}
@@ -128,9 +132,7 @@ columns=fullflexible
 \newcommand{\dsum}{\displaystyle\sum}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{definition}{Definition}
+
 
 Download the python code from 
 \begin{lstlisting}
@@ -152,161 +154,78 @@ Let $X_{1},X_{2},....$ be i.i.d N(1,1) random variables.Let $S_{n}=X_{1}^{2}+X_{
 \end{enumerate}
 
 \section{Solution-CSIR UGC NET June 2012,Q.50}
+
+\begin{definition}[NON-CENTRAL CHI SQUARE DISTRIBUTION]
+Let $X_{1},X_{2},X_{3}.,X_{i},.X_{n}$ be n independent, normally distributed random variables with means $\mu_{i}$ and unit variances.Then the random variable
+$$\sum_{i=0}^{n}X_{i}$$ is distributed according to the non-central chi square distribution.It has  It has two parameters 'k' which specifies the number of degrees of freedom (i.e. the number of $X_{i}$), and '$\lambda$' which is called non-centrality parameter given by,
+\begin{align}
+    \lambda=\sum_{i=0}^{n}\mu_{i}^2
+\end{align}
+\label{def-NCSD}
+\end{definition}
+\begin{lemma}
+Moment generating function of a non-central chi square distributed random variable X is given by,
+\begin{align}
+    M_{X}(t)=\frac{e^{\frac{\lambda t}{1-2t}}}{(1-2t)^{\frac{n}{2}}}
+\end{align}
+\label{MGF}
+\end{lemma}
 We know that if two normal random variables $X,Y$ are independent then $X^2,Y^2$ are also independent.
 \\Since $X_{1},X_{2},X_{3},...$ are mutually independent random variables therefore the random variables $X_{1}^{2},X_{2}^{2},X_{3}^{2},....$  are also mutually independent.
-
-\begin{align}
-    S_{n}=X_{1}^2+X_{2}^2+X_{3}^2+......X_{n}^2
-\end{align}
- \begin{lemma}
- If X and Y are independent random variables
- \begin{align}
-     Var(X+Y)=Var(X)+Var(Y)
- \end{align}
- \end{lemma}
- \begin{proof}
- \begin{align}
-    Var(X+Y)&=E\brak{(X+Y)^{2}}-\brak{E(X+Y)}^{2}
- \end{align}
- \begin{multline}
-Var(X+Y)=E\brak{X^{2}+Y^{2}+2XY}-\\
- \brak{E(X)+E(Y)}^{2}
-\end{multline}
-\begin{multline}
-Var(X+Y)=E((X^{2})+E(Y^{2})+2E(XY)-\\
-        \brak{E(X)^{2}+E(Y)^{2}+2E(X)E(Y)}
-\end{multline}      
-\begin{multline}
-    Var(X+Y)=Var(X)+Var(Y)+2E(XY)\\
-    -2E(X)E(Y)
-\end{multline}
- Now to show that E(XY)=E(X)E(Y) if X,Y are independent
- \begin{align}
-     E(XY)&=\sum_{x,y}xy\Pr\brak{X=x,Y=y}
-     \\ &=\sum_{x,y}xy\Pr\brak{X=x}\Pr\brak{Y=y}
-     \\ &=\sum_{x}\sum_{y}xy\Pr\brak{X=x}\Pr\brak{Y=y}
-     \\ &=\sum_{x}x\Pr\brak{X=x}\sum_{y}y\Pr\brak{Y=y}
-     \\\implies E(XY) &=E(X)E(Y)
- \end{align}
- Now substituting (2.0.11) in (2.0.6) we get,
- \begin{align}
-     Var(X+Y)=Var(X)+Var(Y)
- \end{align}
- \end{proof}
-By using lemma (2.1),
-\begin{align}
-    Var\brak{S_{n}}=Var\brak{X_{1}^2}+Var\brak{X_{2}^2}+..Var\brak{X_{n}^2}
-\end{align}
-Since $X_{1},X_{2},..X_{n}$ are identically distributed random variables therefore the random variables $X_{1}^2,X_{2}^2,...X_{n}^2$ are also identical.So,
-\begin{align}
-    Var\brak{X_{1}^2}=Var\brak{X_{2}^2}=...=Var\brak{X_{n}^2}
-\end{align}
-Now we find the variance of $X_{1}^2$.
-\begin{align}
-    Var(X_{1}^2)=E(X_{1}^4)-(E(X_{1}^2))^2
-\end{align}
-But we don't know the values of $E(X_{1}^2)$ and $E(X_{1}^4)$.
-Finding the value of $E(X_{1}^2)$,
-\begin{align}
-    Var(X_{1})=E(X_{1}^2)-(E(X_{1}))^2
-\end{align}
-Since $X_{1}$ is a N(1,1) random variable $E(X_{1})=1$ and $Var(X_{1})=1$.Therefore,
-\begin{align}
-    E(X_{1}^2)-(1)^2&=1
- \\  E(X_{1}^2)&=2
-\end{align}
-Finding the value of $E(X_{1}^4)$.
-\\Since $X_{1}$ is a $N(1,1)$ random variable pdf of $X_{1}$ will be 
-\begin{align}
-    f(X_{1})=\frac{1}{\sqrt{2\pi}}\brak{e^{-\frac{(X_{1}-1)^2}{2}}}
-\end{align}
 \begin{figure}[h]
-    \centering
-    \includegraphics[width=\columnwidth]{PDF.png}
-    \caption{PDF of $X_{1},X_{2},..$}
+ \centering
+\includegraphics[width=\columnwidth]{PDF.png}
+ \caption{PDF of $X_{1},X_{2},..$}
     \label{fig:my_label}
 \end{figure}
-
-Now expected value of $X_{1}^{4}$ will be,
+\\Given,
 \begin{align}
-   E(X_{1}^4)&=\int\limits_{-\infty}^{+\infty}X_{1}^{4}f(X_{1})\,dX_{1}
-\\   &=\int\limits_{-\infty}^{+\infty}X_{1}^{4}\brak{\frac{1}{\sqrt{2\pi}}\brak{e^{-\frac{(X_{1}-1)^2}{2}}}}\,dX_{1}
+    S_{n}=X_{1}^{2}+X_{2}^2+..+X_{n}^2
 \end{align}
-
-Now put $X_{1}-1=t$,
+From definition \ref{def-NCSD},
+Since $X_{1},X_{2},...$ are i.i.d N(1,1) normal random variables therefore the distribution of the random variable $S_{n}=X_{1}^{2}+X_{2}^{2}+...X_{n}^{2}$ is a non-central chi square distribution with 'n' degrees of freedom and non centrality parameter '$\lambda$' given by
 \begin{align}
-    E(X_{1}^4)&=\frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{+\infty}(t+1)^{4}\brak{e^{-\frac{t^{2}}{2}}}\,dt
-\\ &=\frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{+\infty}(t^{4}+4t^{3}+6t^{2}+4t+1)\brak{e^{-\frac{t^{2}}{2}}}\,dt
+    \lambda&=\sum_{i=1}^{n}(\mu_{i})^{2}
+    \\\lambda&=\sum_{i=1}^{n}1=n
 \end{align}
-Since $\int\limits_{-\infty}^{+\infty}4t^3\brak{e^{-\frac{t^{2}}{2}}}\,dt$ and $\int\limits_{-\infty}^{+\infty}4t\brak{e^{-\frac{t^{2}}{2}}}\,dt$ are equal to zero,the equation will get reduced to
+From Lemma \ref{MGF},
 \begin{align}
-    E(X_{1}^4)&=\frac{1}{\sqrt{2\pi}}\int\limits_{-\infty}^{+\infty}(t^{4}+6t^{2}+1)\brak{e^{-\frac{t^{2}}{2}}}\,dt
-\end{align}
-Now put $\frac{t}{\sqrt{2}}=x$,
-\begin{align}
-    E(X_{1}^4)&=\frac{1}{\sqrt{\pi}}\int\limits_{-\infty}^{+\infty}(4x^{4}+12x^{2}+1)\brak{e^{-x^{2}}}\,dx
-\end{align}
-We know that,
-\begin{align}
-\int\limits_{-\infty}^{+\infty}\brak{e^{-ax^{2}}}\,dx&=\frac{\sqrt{\pi}}{\sqrt{a}}
-\\\frac{d\brak{\int\limits_{-\infty}^{+\infty}\brak{e^{-ax^{2}}}\,dx}}{da}&=\frac{d}{da}\brak{\frac{\sqrt{\pi}}{\sqrt{a}}}
-\\\int\limits_{-\infty}^{+\infty}x^{2}\brak{e^{-ax^{2}}}\,dx&=\frac{\sqrt{\pi}}{2\sqrt{a^3}}
-\end{align}
-similarly,
-\begin{align}
-    \int\limits_{-\infty}^{+\infty}x^{4}\brak{e^{-ax^{2}}}\,dx&=\frac{3\sqrt{\pi}}{4\sqrt{a^5}}
-\end{align}
-Using (2.0.29),(2.0.28) and (2.0.26) in (2.0.25) we get,
-\begin{align}
-     E(X_{1}^4)&=\frac{1}{\sqrt{\pi}}\brak{4\brak{\frac{3\sqrt{\pi}}{4}}+12\brak{\frac{\sqrt{\pi}}{2}}+\sqrt{\pi}}
-     \\&=3+6+1
-    \\\implies  E(X_{1}^4)&=10
-\end{align}
-Substituting (2.0.18),(2.0.32) in (2.0.15) we get,
-\begin{align}
-    Var(X_{1}^{2})&=10-4
-    \\\implies Var(X_{1}^{2})&=6
-\end{align}
-By the equations (2.0.34),(2.0.13) and (2.0.14), we can conclude that 
-\begin{align}
-    Var(S_{n})=6n
-\end{align}
-$$\lim_{n \to \infty}{\frac{Var\brak{S_{n}}}{n}}=\lim_{n \to \infty}{\frac{6n}{n}}=\lim_{n \to \infty}{6}=6$$
-Hence, option (B) is correct.
-\section{\textbf{ALTERNATIVE METHOD:}}
-Since $X_{1},X_{2},...$ are i.i.d N(1,1) normal random variables therefore the distribution of the random variable $S_{n}=X_{1}^{2}+X_{2}^{2}+...X_{n}^{2}$ is a non-central chi square distribution with 'n' degrees of freedom and non centrality parameter '$\lambda$'.
-\begin{align}
-    \lambda&=\sum_{i=1}^{n}(E(X_{i}))^{2}
-    \\   &=n
-\end{align}
-Moment Generating Function of a non-central chi square distribution is given by
-\begin{align}
-    M(X,n,\lambda)=\frac{e^{\frac{\lambda t}{1-2t}}}{(1-2t)^{\frac{n}{2}}}
-\end{align}
-Therefore,
-\begin{align}
-    M(S_{n},N,\lambda)&=\frac{e^{\frac{n t}{1-2t}}}{(1-2t)^{\frac{n}{2}}}
+    M_{S_{n}}(t)&=\frac{e^{\frac{n t}{1-2t}}}{(1-2t)^{\frac{n}{2}}}
 \end{align}
 and
 \begin{align}
-    \\ Var(S_{n})&=E(S_{n}^2)-(E(S_{n}))^2
+Var(S_{n})&=E(S_{n}^2)-(E(S_{n}))^2
+\label{1}
 \end{align}
 From the properties of MGF,
 \begin{align}
- \frac{d}{dt}\brak{M(S_{n},N,\lambda)}|_{t=0}&=E(S_{n})
-\\ \frac{d^{2}}{dt^{2}}\brak{M(S_{n},N,\lambda)}|_{t=0}&=E(S_{n}^2)
+ E(S_{n})&=\frac{d}{dt}\brak{M_{S_{n}}(t)}|_{t=0}
+\\E(S_{n})&=\frac{2ne^{\frac{nt}{1-2t}}}{(1-2t)^{\frac{n}{2}+2}}(1-t)|_{t=0}
+\\\implies  E(S_{n})&=2n \label{2}
 \end{align}
-Solving we get
+From the properties of MGF,
 \begin{align}
-    E(S_{n})&=n+\lambda=2n
-   \\ E(S_{n}^{2})&=n^2+\lambda^2+2n\lambda+2n+4\lambda
-    \\ E(S_{n}^{2})&=4n^2+6n
+  E(S_{n}^2)&=\frac{d^{2}}{dt^{2}}\brak{M_{S_{n}}(t)}|_{t=0}
 \end{align}
-Therefore,
+\begin{multline}
+ E(S_{n}^2)=\frac{2ne^{\frac{nt}{1-2t}}}{(1-2t)^{\frac{n}{2}+4}}(n(1-t)-(1-2t)^{2}\\
+ +(1-t)(1-2t)(n+4))|_{t=0}
+\end{multline}
 \begin{align}
-    Var(S_{n})=6n
+E(S_{n}^2)&=\frac{2n}{1^{n/2+2}}\brak{n-1^2+n+4}
+\\E(S_{n}^2)&=2n\times(2n+3)
+\\\implies E(S_{n}^2)&=4n^{2}+6n
+\label{3}
+\end{align}
+Substituting equations (\ref{2}) and (\ref{3}) in (\ref{1}),we get 
+\begin{align}
+    Var(S_{n})&=4n^{2}+6n-\brak{2n}^{2}
+\\ \implies Var(S_{n})&=6n
 \end{align}
 and
 $$\lim_{n \to \infty}{\frac{Var\brak{S_{n}}}{n}}=\lim_{n \to \infty}{\frac{6n}{n}}=\lim_{n \to \infty}{6}=6$$
-\end{document}
+
 Hence,option(B) is correct.
+    
+ 
+\end{document}
