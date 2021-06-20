@@ -164,6 +164,12 @@ $$\sum_{i=0}^{n}X_{i}$$ is distributed according to the non-central chi square d
 \end{align}
 \label{def-NCSD}
 \end{definition}
+From definition \ref{def-NCSD},
+Since $X_{1},X_{2},...$ are i.i.d N(1,1) normal random variables therefore the distribution of the random variable $S_{n}=X_{1}^{2}+X_{2}^{2}+...X_{n}^{2}$ is a non-central chi square distribution with 'n' degrees of freedom and non-centrality parameter '$\lambda$' given by
+\begin{align}
+    \lambda&=\sum_{i=1}^{n}(\mu_{i})^{2}
+    \\\lambda&=\sum_{i=1}^{n}1=n
+    \end{align}
 \begin{lemma}
 Moment generating function of a non-central chi square distributed random variable X is given by,
 \begin{align}
@@ -171,22 +177,13 @@ Moment generating function of a non-central chi square distributed random variab
 \end{align}
 \label{MGF}
 \end{lemma}
-From definition \ref{def-NCSD},
-Since $X_{1},X_{2},...$ are i.i.d N(1,1) normal random variables therefore the distribution of the random variable $S_{n}=X_{1}^{2}+X_{2}^{2}+...X_{n}^{2}$ is a non-central chi square distribution with 'n' degrees of freedom and non-centrality parameter '$\lambda$' given by
-\begin{align}
-    \lambda&=\sum_{i=1}^{n}(\mu_{i})^{2}
-    \\\lambda&=\sum_{i=1}^{n}1=n
-\end{align}
+
 
 From Lemma \ref{MGF} Moment generating function of $S_{n}$ is given by,
 \begin{align}
     M_{S_{n}}(t)&=\frac{e^{\frac{n t}{1-2t}}}{(1-2t)^{\frac{n}{2}}}
 \end{align}
-and variance of $S_{n}$,
-\begin{align}
-Var(S_{n})&=E(S_{n}^2)-(E(S_{n}))^2
-\label{1}
-\end{align}
+
 
 \begin{figure}[h]
  \centering
@@ -194,10 +191,7 @@ Var(S_{n})&=E(S_{n}^2)-(E(S_{n}))^2
  \caption{PDF of $X_{1},X_{2},..$}
     \label{fig:my_label}
 \end{figure}
-Given,
-\begin{align}
-    S_{n}=X_{1}^{2}+X_{2}^2+..+X_{n}^2
-\end{align}
+
 \newpage
 
 \begin{lemma}
@@ -244,6 +238,12 @@ E(S_{n}^2)&=\frac{2n}{1^{n/2+2}}\brak{n-1^2+n+4}
 \\E(S_{n}^2)&=2n\times(2n+3)
 \\\implies E(S_{n}^2)&=4n^{2}+6n
 \label{3}
+\end{align}
+
+Variance of $S_{n}$,
+\begin{align}
+Var(S_{n})&=E(S_{n}^2)-(E(S_{n}))^2
+\label{1}
 \end{align}
 Substituting equations (\ref{2}) and (\ref{3}) in (\ref{1}),we get 
 \begin{align}
