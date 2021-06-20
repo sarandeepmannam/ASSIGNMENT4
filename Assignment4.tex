@@ -194,8 +194,14 @@ From Lemma \ref{MGF} Moment generating function of $S_{n}$ is given by,
 
 \newpage
 
+\begin{definition}[nth moment]
+ The nth moment of a random variable $X$ about a number $k$ is the expected value of the nth power of the deviations of $X$ about $k$ and is given by $E((X-k)^{n})$.
+ 
+ \label{nth-mom}
+\end{definition}
+From definition \ref{nth-mom},the nth moment of a random variable $X$ about $0$ is given by $E(X^{n})$, which is the expected value of nth power of $X$.
 \begin{lemma}
- The nth moment of a random variable $X$ whose MGF is $M_{X}(t)\brak{\equiv E(e^{tX})=\sum_{k=0}^{\infty}\frac{(tX)^k}{k!}}$ is given by,
+ The nth moment of a random variable $X$ about $0$ whose MGF is $M_{X}(t)\brak{\equiv E(e^{tX})}$ is the value of the nth derivative of the MGF at $0$ and is given by,
  \begin{align}
      E(X^{n})=\brak{\frac{d^{n}}{dt^{n}}\brak{M_{X}(t)}}_{t=0}
      \label{4}
@@ -206,9 +212,14 @@ From Lemma \ref{MGF} Moment generating function of $S_{n}$ is given by,
 \begin{align}
     M_{X}(t)\equiv E(e^{tX})
 \end{align}
-Using taylor series expansion,
+Using taylor series,
 \begin{align}
- M_{X}(t)=E(1+\frac{tX}{1!}+\frac{(tX)^2}{2!}+\frac{(tX)^3}{3!}+..+\frac{(tX)^n}{n!}+..)
+e^{tX}&=1+\frac{tX}{1!}+\frac{(tX)^2}{2!}+\frac{(tX)^3}{3!}+..+\frac{(tX)^n}{n!}+..
+\end{align}
+Therefore,
+\begin{align}
+ M_{X}(t)&=E(1+\frac{tX}{1!}+\frac{(tX)^2}{2!}+\frac{(tX)^3}{3!}+..+\frac{(tX)^n}{n!}+..)
+ \\M_{X}(t)&=E(1)+tE\brak{\frac{X}{1!}}+t^{2}E\brak{\frac{X^2}{2!}}+t^3E\brak{\frac{X^3}{3!}}+...
 \end{align}
 Taking $n$th derivative  on both sides with respect to '$t$' at $t=0$ we get,
 \begin{multline}
